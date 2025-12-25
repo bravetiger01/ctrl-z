@@ -11,6 +11,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Handle very short or vague inputs without API call
+    const wordCount = regret.trim().split(/\s+/).length;
+    if (wordCount < 10) {
+      return NextResponse.json({
+        whatWentWrong: "It's hard to see the full picture from what you've shared. Sometimes the weight of a regret makes it difficult to put into words, or maybe you're still figuring out what happened.",
+        lessonLearned: "When something feels too big or too unclear to describe, that's often a sign it needs more time. Sitting with it—without forcing clarity—can help you understand what you're really feeling.",
+        betterFuture: "When you're ready to look closer, the details will come. For now, knowing that something matters enough to revisit is already a step forward.",
+      });
+    }
+
     const apiKey = process.env.GEMINI_API_KEY;
     
     if (!apiKey) {
@@ -31,6 +41,7 @@ Analyze the user's regret and return ONLY a valid JSON object with this exact st
 
 Tone: Calm, reflective, human. No clichés. No toxic positivity. No "everything happens for a reason."
 Be honest but kind. Acknowledge pain without dwelling. Focus on understanding, not fixing.
+
 
 User's regret:
 ${regret}
