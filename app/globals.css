@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f6f4;
+  --foreground: #3a3a3a;
+  --muted: #8a8a8a;
+  --accent: #6b7c8f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-serif), serif;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1200ms ease-out forwards;
+}
+
+
+@keyframes rewind-line {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.animate-rewind-line {
+  animation: rewind-line 2500ms ease-in-out;
+}
+
+
+@keyframes rewind-hour {
+  from {
+    transform: translateX(-50%) rotate(90deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(-630deg);
+  }
+}
+
+@keyframes rewind-minute {
+  from {
+    transform: translateX(-50%) rotate(90deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(-1350deg);
+  }
+}
+
+.animate-rewind-hour {
+  animation: rewind-hour 7500ms linear forwards;
+}
+
+.animate-rewind-minute {
+  animation: rewind-minute 7500ms linear forwards;
 }
