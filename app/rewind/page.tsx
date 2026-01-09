@@ -16,23 +16,10 @@ export default function RewindPage() {
   const router = useRouter();
 
   const handleSubmit = () => {
-    if (regret.trim()) {
-      sessionStorage.setItem("userRegret", regret);
-      setIsRewinding(true);
-      
-      let lineIndex = 0;
-      const interval = setInterval(() => {
-        lineIndex++;
-        if (lineIndex < REWIND_LINES.length) {
-          setCurrentLine(lineIndex);
-        } else {
-          clearInterval(interval);
-          setTimeout(() => {
-            router.push("/reflection");
-          }, 2500);
-        }
-      }, 2500);
-    }
+
+    if (!regret.trim()) return;
+
+    router.push(`/reflection?regret=${encodeURIComponent(regret)}`);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
